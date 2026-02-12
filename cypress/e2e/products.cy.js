@@ -13,14 +13,22 @@ describe('Product Navigation Test', () => {
     loginPage.clickLogin()
   })
 
-  it('Should open product detail page', () => {
+  it('Should open product and add to cart', () => {
+
     productsPage.clickFirstProduct()
 
     cy.url().should('include', 'inventory-item')
 
-    cy.get('.inventory_details_name').should('be.visible')
-    cy.get('.inventory_details_price').should('be.visible')
-    cy.get('.inventory_details_desc').should('be.visible')
+    productsPage.verifyProductDetails()
+
+    productsPage.addToCart()
+
+    productsPage.verifyCartBadge()
+
+    productsPage.openCart()
+
+    productsPage.verifyProductInCart()
+
   })
 
 })
